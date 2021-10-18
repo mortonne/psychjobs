@@ -127,7 +127,7 @@ def scrape():
         '--areas', '-a', help='comma-separated list of areas to include'
     )
     args = parser.parse_args()
-    area_codes = args.areas.split(',')
+
     areas = {
         'cog': 'Cognitive',
         'neuro': 'Neuroscience & Biopsychology',
@@ -141,6 +141,10 @@ def scrape():
         'io': 'I/O',
         'school': 'School',
     }
+    if args.areas is None:
+        area_codes = list(areas.keys())
+    else:
+        area_codes = args.areas.split(',')
     areas_included = [areas[code] for code in area_codes]
     jobs = scrape_areas(areas_included)
     jobs.to_csv(args.spreadsheet, index=False)
