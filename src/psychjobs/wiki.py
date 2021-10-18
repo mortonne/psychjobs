@@ -143,4 +143,4 @@ def scrape():
     }
     areas_included = [areas[code] for code in area_codes]
     jobs = scrape_areas(areas_included)
-    jobs.to_csv(args.spreadsheet)
+    jobs.to_csv(args.spreadsheet, index=False)
