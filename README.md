@@ -12,3 +12,8 @@ pip install git+git://github.com/mortonne/psychjobs
 ```bash
 psychjobs jobs.csv --areas cog,neuro
 ```
+
+To see the codes for the different areas:
+```bash
+psychjobs -h
+```
