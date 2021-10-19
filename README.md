@@ -10,6 +10,9 @@ pip install git+git://github.com/mortonne/psychjobs
 
 ## Usage
 
+To scrape http://psychjobsearch.wikidot.com/ for 
+jobs listed under Cognitive or Neuroscience & 
+Biopsychology and save to a CSV file:
 ```bash
 psychjobs jobs.csv --areas cog,neuro
 ```
