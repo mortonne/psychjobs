@@ -53,7 +53,7 @@ def parse(soup, p):
             'due': due,
             'status': status,
             'description': description,
-            'link': link,
+            'link': ','.join([l for l in links if not l.startswith('#')]),
         }
     )
     return job
@@ -156,4 +156,10 @@ def scrape():
         area_codes = args.areas.split(',')
     areas_included = [areas[code] for code in area_codes]
     jobs = scrape_areas(areas_included)
+
+    # split links
+    split = jobs['link'].str.split(',', expand=True)
+    split.columns = [f'link{i+1}' for i in split.columns]
+    jobs = pd.concat([jobs.drop('link', axis=1), split], axis=1)
+
     jobs.to_csv(args.spreadsheet, index=False)
