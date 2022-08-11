@@ -1,3 +1,25 @@
+[project]
+name = "psychjobs"
+description = "PsychJobs: Information about psychology faculty positions"
+version = "0.1.0"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Neal W Morton", email = "mortonne@gmail.com"}]
+keywords = ["psychology", "jobs"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+]
+urls = {project = "https://github.com/mortonne/psychjobs"}
+dependencies = [
+    "beautifulsoup4",
+    "pandas",
+]
+
+[project.scripts]
+psychjobs = "psychjobs.wiki:scrape"
+
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
