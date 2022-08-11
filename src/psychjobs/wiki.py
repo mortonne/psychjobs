@@ -112,12 +112,15 @@ def scrape():
         quant: Quantitative
         open: Open Area
         clinic: Clinical & Counseling
+        comm: Community
         dev: Developmental
         ed: Educational
         health: Health
         eng: Human Factors & Engineering Psychology
-        io: I/O
+        io: Industrial-Organizational (I-O)
         school: School
+        social: Social & Personality
+        other: Other
     """
     parser = argparse.ArgumentParser(
         description=doc, formatter_class=argparse.RawTextHelpFormatter
@@ -134,12 +137,15 @@ def scrape():
         'quant': 'Quantitative',
         'open': 'Open Area',
         'clinic': 'Clinical & Counseling',
+        'comm': 'Community',
         'dev': 'Developmental',
         'ed': 'Educational',
         'health': 'Health',
         'eng': 'Human Factors & Engineering Psychology',
-        'io': 'I/O',
+        'io': 'Industrial-Organizational (I-O)',
         'school': 'School',
+        'social': 'Social & Personality',
+        'other': 'Other',
     }
     if args.areas is None:
         area_codes = list(areas.keys())
