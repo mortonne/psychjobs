@@ -28,7 +28,7 @@ def parse(soup, p):
     institute = bold[0].contents[0] if bold else None
     status = bold[1].contents[0] if len(bold) > 1 else None
 
-    contents = [c for c in p.contents if isinstance(c, str)]
+    contents = [c for c in p.contents if isinstance(c, str) and c.strip()]
     description = m.group(0) if (m := re.search(r'\w.*\w', contents[0])) else None
 
     s_date = m.group(0) if (m := re.search(r'\w.*\w', contents[1])) else None
