@@ -79,7 +79,7 @@ def find_area_jobs(soup, area):
                 continue
             if job is None:
                 continue
-            if job['institute'] is None or job['description'] is None:
+            if job['institute'] is None:
                 continue
             job['area'] = area
             job_list.append(job)
