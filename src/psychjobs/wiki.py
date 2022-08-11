@@ -67,6 +67,8 @@ def find_area_jobs(soup, area):
 
     job_list = []
     for sib in target.find_next_siblings():
+        if not sib.text:
+            continue
         if sib.name == "h3":
             break
         else:
