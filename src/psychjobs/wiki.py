@@ -9,21 +9,24 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 
-def parse(p):
+def parse(soup, p):
     """Parse a job entry."""
+    links = [a['href'] for a in p.find_all('a') if a.has_attr('href')]
+    if not links:
+        raise ValueError('No link found.')
+
+    if '#' in links[0]:
+        # if first link is within page, follow it
+        a_linked = soup.find('a', attrs={'name': links[0][1:]})
+        if a_linked is not None:
+            return parse(soup, a_linked.parent)
+
     if len(p.contents) < 4:
         return None
 
     bold = p.find_all('strong')
     institute = bold[0].contents[0] if bold else None
     status = bold[1].contents[0] if len(bold) > 1 else None
-
-    links = [a['href'] for a in p.find_all('a') if a.has_attr('href')]
-    if len(links) > 1:
-        raise ValueError('Multiple links found.')
-    elif len(links) == 0:
-        raise ValueError('No link found.')
-    link = links[0]
 
     contents = [c for c in p.contents if isinstance(c, str)]
     description = m.group(0) if (m := re.search(r'\w.*\w', contents[0])) else None
@@ -68,7 +71,7 @@ def find_area_jobs(soup, area):
             break
         else:
             try:
-                job = parse(sib)
+                job = parse(soup, sib)
             except ValueError:
                 print(f'Problem parsing entry: {sib.text}')
                 continue
